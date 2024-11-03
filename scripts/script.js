@@ -41,15 +41,17 @@ const agregarProductoBtn = document.getElementById('agregarProductoBtn');
 const cerrarModal = document.getElementById('cerrarModal');
 const formAgregarProducto = document.getElementById('formAgregarProducto');
 
+// Abrir modal para agregar producto
 agregarProductoBtn.onclick = function() {
     modalAgregarProducto.style.display = 'block';
 }
 
+// Cerrar modal para agregar producto
 cerrarModal.onclick = function() {
     modalAgregarProducto.style.display = 'none';
 }
 
-// agregar un producto
+// Agregar un producto
 formAgregarProducto.onsubmit = async function(e) {
     e.preventDefault();
 
@@ -57,7 +59,7 @@ formAgregarProducto.onsubmit = async function(e) {
         Nombre: document.getElementById('nombre').value,
         Descripcion: document.getElementById('descripcion').value,
         Precio: parseFloat(document.getElementById('precio').value).toFixed(2),
-        cantidad: parseInt(document.getElementById('cantidad').value, 10),
+        cantidad: parseInt(document.getElementById('cantidad').value),
         categoria: document.getElementById('categoria').value,
         urlimage: document.getElementById('urlimage').value
     };
@@ -86,7 +88,7 @@ formAgregarProducto.onsubmit = async function(e) {
     }
 }
 
-// eliminar un producto
+// Eliminar un producto
 async function eliminarProducto(id) {
     if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
         try {
@@ -112,7 +114,7 @@ const modalEditarProducto = document.getElementById('modalEditarProducto');
 const cerrarModalEditar = document.getElementById('cerrarModalEditar');
 const formEditarProducto = document.getElementById('formEditarProducto');
 
-// modal de edición
+// Abrir modal de edición
 async function abrirModalEditar(id) {
     try {
         const response = await fetch(`http://localhost:5000/inventario/${id}`); // Obtener el producto por ID
@@ -136,11 +138,12 @@ async function abrirModalEditar(id) {
     }
 }
 
+// Cerrar modal de edición
 cerrarModalEditar.onclick = function() {
     modalEditarProducto.style.display = 'none';
 }
 
-// actualizar un producto
+// Actualizar un producto
 formEditarProducto.onsubmit = async function(e) {
     e.preventDefault();
 
@@ -148,8 +151,8 @@ formEditarProducto.onsubmit = async function(e) {
     const productoActualizado = {
         Nombre: document.getElementById('editarNombre').value,
         Descripcion: document.getElementById('editarDescripcion').value,
-        Precio: parseFloat(document.getElementById('editarPrecio').value).toFixed(2),
-        cantidad: parseInt(document.getElementById('editarCantidad').value, 10),
+        Precio: document.getElementById('editarPrecio').value,
+        cantidad: document.getElementById('editarCantidad').value,
         categoria: document.getElementById('editarCategoria').value,
         urlimage: document.getElementById('editarUrlImagen').value
     };
